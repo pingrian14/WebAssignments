@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page</title>
+
+    <style>
+        body {
+            background-color:lavenderblush;
+        }
+        .title {
+            font-family:verdana;
+            color:lightcoral;
+            border:lightblue;
+            border-width:5px;
+            border-style:dotted;
+        }
+        .text {
+            font-family:tahoma;
+            color:lightcoral;
+            background-image: url(image.jfif);
+            background-repeat: no-repeat;
+            width:fit-content;
+            padding:10px 10px;
+        }
+    </style>
+    
+</head>
+<body>
+
+    <h1 class="title" id="test"> </h1>
+    <p class="text" id="test2"> </p>
+    <p class="text" id="test3"> </p>
+
+    <label for="name">Enter Name:</label><br>
+    <input type="text" id="name" name="name"><br>
+    <input type="submit" value="Submit">
+    
+    <script>
+        alert("Hello World")
+        document.getElementById("test").innerText="Hello World"
+        document.getElementById("test2").innerText="I see you"
+        document.getElementById("test3").innerText="Look down"
+    </script>
+</body>
+</html>

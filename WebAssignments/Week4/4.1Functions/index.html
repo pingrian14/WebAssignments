@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Functions</title>
+
+    <style>
+        .submit {
+            background:lightcyan;
+            border:1px solid steelblue;
+            width:30px;
+            padding:5px;
+        }
+        .submit:hover {
+            background-color:lightblue;
+        }
+
+
+        .numInput {
+            text-align:center;
+            background:lightcyan;
+            border:2px solid steelblue;
+            font-weight:bold;
+        }
+        
+        .form{
+            border:3px solid black;
+            width:fit-content;
+            height:fit-content;
+            padding:20px 50px;
+            padding-bottom:200px;
+            margin:50px;
+            
+
+        }
+
+        .title {
+            text-decoration: underline solid;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="title">My First Functions</h1>
+
+    <h3>Enter First Name:</h3>
+    <input type="text" id="fname">
+    <h3>Enter Last Name:</h3>
+    <input type="text" id="lname">
+    <h3>Enter Age:</h3>
+    <input type="text" id="age">
+
+    <button onclick="words()">Submit All</button>
+
+    <br>
+
+    <div class = "form">
+        <h2 id="formTitle" class="title">Details</h2>
+        <h3 id="output">_____________</h3>
+        <h3 id="closing">Please enter input above</h3>
+    </div>
+
+    <h3 title="Answer will appear below">Enter 2 numbers</h3>
+
+    <input type="text" id="num1" class="numInput">
+
+    <button class="submit" onclick="add()">+</button>
+    <button class="submit" onclick="subtract()">-</button>
+    <button class="submit" onclick="divide()">/</button>
+    <button class="submit" onclick="multiply()">x</button>
+    
+    <input type="text" id="num2" class="numInput">
+
+    <h2 id="answer"></h2>
+
+    <script>
+
+        function words() {
+            let fname = document.getElementById("fname").value;
+            let lname = document.getElementById("lname").value;
+            let age = document.getElementById("age").value;
+            
+            document.getElementById("formTitle").innerHTML = "Person Details:";
+            document.getElementById("output").innerHTML = `Name: ${fname} ${lname} <br> Age: ${age}`;
+            document.getElementById("closing").innerHTML = "Thank you for filling out the form!";
+        }
+
+        function add() {
+            let num1 = document.getElementById("num1").value;
+            let num2 = document.getElementById("num2").value;
+            let sum = parseFloat(num1) + parseFloat(num2);
+            document.getElementById("answer").innerHTML=` = ${sum}`;
+        }
+
+
+        function subtract() {
+            let num1 = document.getElementById("num1").value;
+            let num2 = document.getElementById("num2").value;
+            let diff = parseFloat(num1) - parseFloat(num2);
+            document.getElementById("answer").innerHTML=` = ${diff}`;
+        }
+
+
+        function divide() {
+            let num1 = document.getElementById("num1").value;
+            let num2 = document.getElementById("num2").value;
+            let quotient = parseFloat(num1) / parseFloat(num2);
+            document.getElementById("answer").innerHTML=` = ${quotient}`;
+;
+        }
+       
+        function multiply() {
+            let num1 = document.getElementById("num1").value;
+            let num2 = document.getElementById("num2").value;
+            let product = parseFloat(num1) * parseFloat(num2);
+            document.getElementById("answer").innerHTML=` = ${product}`;
+        }
+
+
+    </script>
+</body>
+</html>

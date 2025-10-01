@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Tab</title>
+
+    <style>
+        body {background-color:lavenderblush;
+        }
+        
+        .top {
+            font-family:verdana;
+            color:lightcoral;
+            text-align:center;
+        }
+
+        .numbold {
+            font-family:verdana;
+            font-weight:bold;
+            font-size:30px;
+            color:steelblue;
+        }
+
+        .numsmall {
+            font-family:tahoma;
+            color:white;
+        }
+
+        .right {
+            text-align:right;
+            font-family:tahoma;
+            color:lightcoral;
+            border:8px dotted white;
+        }
+        
+        .maindiv {
+            display:inline-block;
+        }
+        
+        .div1 {
+            background-color:lightgreen;
+            border:15px dashed lightcoral;
+            width:100px;
+            height:100px;
+            place-items:center;
+        }
+
+        .div2 {
+            background-color:lightcoral;
+            border:10px double lightgreen;
+            width:100px;
+            height:100px;
+            place-items:center;
+        }
+
+
+    </style>
+</head>
+<body>
+    <h1 class="top" id="title"></h1>
+    
+    <h1 class="right" id="boolean"></h1>
+    
+    <div class="maindiv">
+        <div class="div1">
+            <p class="numbold" id="single"></p>
+        </div>
+    
+        <div class="div2">
+            <p class="numsmall" id="double"></p>
+            <p class="numsmall" id="double2"></p>
+        </div>
+    </div>
+
+    <script>
+        let title = "Welcome";
+        let smallnum = 8;
+        let bignum = 25;
+        let bignum2 = 27;
+        let boolean = true;
+
+        document.getElementById("title").innerText = title
+        document.getElementById("single").innerText = smallnum
+        document.getElementById("double").innerText = bignum
+        document.getElementById("double2").innerText = bignum2
+        document.getElementById("boolean").innerText = boolean
+
+
+
+        console.log(typeof title)
+
+    </script>
+</body>
+</html>

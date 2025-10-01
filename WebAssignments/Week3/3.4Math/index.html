@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Library</title>
+    
+    <style>
+        body {
+            background-color:powderblue;
+        }
+        
+        .title {
+            font-family:verdana;
+            color:steelblue;
+            text-decoration:underline dotted papayawhip;
+
+        }
+
+        .subtitle {
+            font-family:verdana;
+            color:steelblue;
+
+        }
+
+        .content {
+            font-family:tahoma;
+            color:steelblue;
+
+        }
+    </style>
+</head>
+<body>
+    <h1 class="title">Using the Almighty Math Library</h1>
+
+    <script>
+        let num1 = 8;
+        let num2 = -5;
+        let num3 = 7;
+        let num4 = 2;
+
+        let sqroot = Math.sqrt(num1);
+        let power = Math.pow(num2,num3);
+        let beforeRound = num2 / num4;
+        let rounded = Math.round(beforeRound);
+
+        document.write(`<p class="content">The square root of ${num1} is ${sqroot}.</p>`)
+        document.write(`<p class="content">${num2} to the power of ${num3} is ${power}.</p>`)
+        document.write(`<p class="content">${num2} divided by ${num4} is ${beforeRound}.</p>`)
+        document.write(`<p class="content">If you round ${beforeRound} to the nearest int, you get ${rounded}.</p>`)
+
+        document.write(`<br>`)
+
+        console.log(power)
+
+        let numChoice1=prompt("Please enter the 1st number");
+        let numChoice2=prompt("Please enter the 2nd number");
+        let answer = numChoice1 / numChoice2;
+        document.write(`<h3 class="subtitle">Division With Your Numbers:</h3>`)
+        document.writeln(`The result of ${numChoice1} divided by ${numChoice2} is ${answer}`);
+    
+    </script>
+</body>
+</html>

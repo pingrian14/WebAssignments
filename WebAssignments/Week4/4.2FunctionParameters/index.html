@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parameters</title>
+</head>
+<body>
+    <button onclick="multNumbers(x,y)">Go</button>
+    <h3 id="ans"></h3>
+
+    <script>
+
+        let x = 4;
+        let y = 5;
+
+        let answer = multNumbers(x,y);
+        let answer2 = addNumber(answer);
+        console.log(answer2);
+
+
+
+        function multNumbers(num1,num2)
+        {
+            let z = num1 * num2;
+       
+            return z;
+        }
+
+        function addNumber(num3)
+        {
+            let num4 = num3 + num3;
+            return num4;
+
+        }
+
+    </script>
+</body>
+</html>

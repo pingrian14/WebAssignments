@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selection Statements</title>
+
+    <style>
+        body {
+            font-family:tahoma;
+        }
+
+        input {
+            border-radius:30px;
+            margin:2px;
+            text-align:center;
+        }
+
+        button {
+            padding:8px;
+            margin:5px;
+            font-weight:bold;
+            background-color:darkcyan;
+            color:whitesmoke;
+            border-radius: 10px;
+        }
+
+        button:hover {
+            padding:8px;
+            font-weight:bold;
+            background-color:rgb(0, 197, 197);
+            color:whitesmoke;
+            border-radius: 10px;
+        }
+        
+        .title {
+            font-family:verdana;
+            color:darkcyan;
+            text-decoration: underline solid darkcyan;
+        }
+
+        .subtitle {
+            font-family:verdana;
+            color:darkcyan;
+        }
+
+    </style>
+</head>
+<body>
+    <h1 class="title">Average Mark Grader</h1>
+    <h3 class="subtitle">Enter your grades for each class in one semester:</h3>
+    
+
+    <label>Enter Your First Mark: </label><input id="mark1" value="96"></input>
+    <br>
+    <label>Enter Your First Mark: </label><input id="mark2" value="85"></input>
+    <br>
+    <label>Enter Your First Mark: </label><input id="mark3" value="88"></input>
+    <br>
+    <label>Enter Your First Mark: </label><input id="mark4" value="72"></input>
+    <br>
+    <button onclick="calc()">CLICK</button>
+
+
+    <p id="ans"></p>
+    <p id="comment"></p>
+
+    <script> 
+        function calc() {
+            mark1 = document.getElementById("mark1").value;
+            mark2 = document.getElementById("mark2").value;
+            mark3 = document.getElementById("mark3").value;
+            mark4 = document.getElementById("mark4").value;
+
+            console.log(mark1);
+
+            let total = parseFloat(mark1) + parseFloat(mark2) + parseFloat(mark3) + parseFloat(mark4);
+
+            console.log(total);
+
+            let avg = total / 4;
+
+            console.log(avg);
+
+            document.getElementById("ans").innerHTML=`The average of your marks is ${avg}%`;
+
+            if (avg == 100) {
+                document.getElementById("comment").innerHTML=`Woah, you got perfect? Congrats, that's amazing!`;
+            } else if (avg >= 90) {
+                document.getElementById("comment").innerHTML=`Your mark is an A. Well done!`;
+
+            } else if (avg >= 80) {
+                document.getElementById("comment").innerHTML=`Your mark is a B. Not bad!`;
+
+            } else if (avg >= 70){
+                document.getElementById("comment").innerHTML=`Your mark is a C. Looks like you've got some studying to do.`;
+
+            } else if (avg >= 60) { 
+                document.getElementById("comment").innerHTML=`Your mark is a D. Yikes, you barely passed...`;
+
+            } else {
+                document.getElementById("comment").innerHTML=`Your mark is an F. Tsk tsk, someone hasn't been studying. You failed, try better next time.`;
+            }
+
+        }
+    </script>
+</body>
+</html>

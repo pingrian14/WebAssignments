@@ -86,16 +86,20 @@
 
             if (avg == 100) {
                 document.getElementById("comment").innerHTML=`Woah, you got perfect? Congrats, that's amazing!`;
+                
             } else if (avg >= 90) {
-                document.getElementById("comment").innerHTML=`Your mark is an A. Well done!`;
+                document.getElementById("comment").innerHTML=`Your mark is an A+. You are one of the best, well done!`;
 
             } else if (avg >= 80) {
-                document.getElementById("comment").innerHTML=`Your mark is a B. Not bad!`;
+                document.getElementById("comment").innerHTML=`Your mark is a A. That's great, keep up the good work!`;
 
             } else if (avg >= 70){
-                document.getElementById("comment").innerHTML=`Your mark is a C. Looks like you've got some studying to do.`;
+                document.getElementById("comment").innerHTML=`Your mark is a B. Not bad, A's are within reach!`;
 
             } else if (avg >= 60) { 
+                document.getElementById("comment").innerHTML=`Your mark is a C. Looks like you've got some studying to do.`;
+
+            } else if (avg >= 50) { 
                 document.getElementById("comment").innerHTML=`Your mark is a D. Yikes, you barely passed...`;
 
             } else {
@@ -105,4 +109,5 @@
         }
     </script>
 </body>
+
 </html>

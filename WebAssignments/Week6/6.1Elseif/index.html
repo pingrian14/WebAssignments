@@ -42,6 +42,17 @@
         .subtitle {
             font-family:verdana;
             color:darkcyan;
+            margin-bottom: 2px;
+        }
+
+        .note {
+            color:rgb(4, 169, 169);
+            margin-top:2px;
+        }
+
+        .error {
+            color:red;
+            font-family: verdana;
         }
 
     </style>
@@ -49,42 +60,138 @@
 <body>
     <h1 class="title">Average Mark Grader</h1>
     <h3 class="subtitle">Enter your grades for each class in one semester:</h3>
+    <h4 class="note">(If you had a spare, type "spare" in the box)</h3>
     
 
-    <label>Enter Your First Mark: </label><input id="mark1" value="96"></input>
+    <label>Enter Your First Mark: </label><input id="mark1" value="96" name="marks"></input>
     <br>
-    <label>Enter Your First Mark: </label><input id="mark2" value="85"></input>
+    <label>Enter Your First Mark: </label><input id="mark2" value="85" name="marks"></input>
     <br>
-    <label>Enter Your First Mark: </label><input id="mark3" value="88"></input>
+    <label>Enter Your First Mark: </label><input id="mark3" value="88" name="marks"></input>
     <br>
-    <label>Enter Your First Mark: </label><input id="mark4" value="72"></input>
+    <label>Enter Your First Mark: </label><input id="mark4" value="72" name="marks"></input>
     <br>
-    <button onclick="calc()">CLICK</button>
+    <button onclick="checkNum()">Mark</button>
+
+    <h4 id="numError" class="error"></h4>
 
 
     <p id="ans"></p>
     <p id="comment"></p>
 
     <script> 
-        function calc() {
-            mark1 = document.getElementById("mark1").value;
-            mark2 = document.getElementById("mark2").value;
-            mark3 = document.getElementById("mark3").value;
-            mark4 = document.getElementById("mark4").value;
+        function checkNum() {
+            let givenNums = document.getElementsByName("marks");
+            let goodNum = false;
+            let spare = false;
+            
 
-            console.log(mark1);
+            for (let i = 0; i < givenNums.length; i++) {
+                
+                
+                if (isNaN(givenNums[i].value)) {
+                    
+                    if (givenNums[i].value.toLowerCase() == "spare") {
+                        goodNum = true;
+                        spare = true;
+                        console.log("Mark is spare");
+                    }
 
-            let total = parseFloat(mark1) + parseFloat(mark2) + parseFloat(mark3) + parseFloat(mark4);
+                    else {
+                        goodNum = false;
+                        console.log("ERROR: mark is not a num");
+
+                    break;
+                    }
+
+
+                } else if (givenNums[i].value.trim() == "") {
+                    goodNum = false;
+                    console.log("ERROR: no mark is written");
+
+                    break;
+
+
+                } else if (givenNums[i].value < 0) {
+                    goodNum = false;
+                    console.log("ERROR: mark is -ve or 0");
+
+                    break;
+           
+                } else {
+                    goodNum = true;
+                    console.log("Mark is good");
+                    
+                }
+            }
+
+            console.log(goodNum)
+
+            if (goodNum == true) {
+                document.getElementById("numError").innerHTML=" "
+                calc(spare);
+            }
+            else {
+                document.getElementById("numError").innerHTML="Please enter a proper mark in each box."
+                document.getElementById("ans").innerHTML=" "
+                document.getElementById("comment").innerHTML=" "
+            }
+
+
+        }
+
+        function calc(spare) {
+            // mark1 = document.getElementById("mark1").value;
+            // mark2 = document.getElementById("mark2").value;
+            // mark3 = document.getElementById("mark3").value;
+            // mark4 = document.getElementById("mark4").value;
+
+            // console.log(mark1);
+
+            let total = 0;
 
             console.log(total);
+            
+            let totalSpares = 0;
+            // if (spare == true) {
+            let givenNums = document.getElementsByName("marks");
+                
+            for (let i = 0; i < givenNums.length; i++) {
+                if (givenNums[i].value.toLowerCase() == "spare") {
+                    console.log(`${givenNums[i]} is spare, ${givenNums[i].value}`);
+                    totalSpares += 1;
+                        
+                    console.log(`Total spares is ${totalSpares}`)
+                }
 
-            let avg = Math.round(total / 4);
+                else {
+                    total += parseFloat(givenNums[i].value)
 
-            console.log(avg);
+                    console.log(`Total is ${total}`)
+                }
+            }
+            // }
+
+            let totalMarks = (4 - totalSpares)
+            console.log(`Total marks inputted is ${totalMarks}`)
+
+            let avg = Math.round(total / totalMarks);
+            // let avg = 0;
+            // if (totalSpares == 4) {
+            //     avg = true;
+            // }
+            // else {
+            //     avg = Math.round(total / totalMarks);
+            // console.log(avg);
+            // }
 
             document.getElementById("ans").innerHTML=`The average of your marks is ${avg}%`;
+            
+            if (totalSpares == 4) { 
+                document.getElementById("ans").innerHTML=`Is this even possible...?`;
+                document.getElementById("comment").innerHTML=`You have inputted 4 spares, an average cannot be assigned.`;
 
-            if (avg == 100) {
+            } else if (avg == 100) {
                 document.getElementById("comment").innerHTML=`Woah, you got perfect? Congrats, that's amazing!`;
                 
             } else if (avg >= 90) {
@@ -101,7 +208,7 @@
 
             } else if (avg >= 50) { 
                 document.getElementById("comment").innerHTML=`Your mark is a D. Yikes, you barely passed...`;
-
+            
             } else {
                 document.getElementById("comment").innerHTML=`Your mark is an F. Tsk tsk, someone hasn't been studying. You failed, try better next time.`;
             }
@@ -111,4 +218,3 @@
 </body>
 
 </html>
-

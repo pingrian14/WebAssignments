@@ -50,8 +50,6 @@
             border:2px solid black;
             color:white;
             padding:10px;
-
-            
         }
 
         button:hover {
@@ -80,6 +78,11 @@
             text-align:center;
         }
 
+        .error {
+            font-family: verdana;
+            color:red;
+        }
+
     </style>
 </head>
 <body>
@@ -88,13 +91,15 @@
         <h1 class="title">Quadratic Formula Calculator</h1>
     
         <div class="inputDiv">
-            <label>Value of A: </label><br><input id="inputA" value=1></input>
-            </div><br><label>Value of B: </label><br><input id="inputB" value=3></input>
-            </div><br><label>Value of C: </label><br><input id="inputC" value=-4></input>
+            <label>Value of A: </label><br><input id="inputA" value=1 name="nums"></input>
+            <br><label>Value of B: </label><br><input id="inputB" value=3 name="nums"></input>
+            <br><label>Value of C: </label><br><input id="inputC" value=-4 name="nums"></input>
+
+            <h4 class="error" id="numError"></h4>
         </div>
 
         <div class="center">
-            <button onclick="displayRoots()">Calculate</button>
+            <button onclick="checkNums()">Calculate</button>
         </div>
 
         <h3 id="answer" class="info"></h3>
@@ -102,50 +107,94 @@
     </div>
 
     <script>
-        //read values from text boxes
-        let aVal = document.getElementById("inputA").value;
-        let bVal = document.getElementById("inputB").value;
-        let cVal = document.getElementById("inputC").value;
+        function checkNums() {
 
-        //test if values are correct
-        console.log(aVal)
-        console.log(bVal)
-        console.log(cVal)
+            // puts abc in a list to check if they're real numbers
+            let givenNums = document.getElementsByName("nums");
+            let goodNum = false;            
 
-        //convert string to float
-        let a = parseFloat(aVal);
-        let b = parseFloat(bVal);
-        let c = parseFloat(cVal);
+            for (let i = 0; i < givenNums.length; i++) {
+                
+                //for each input, checks if it's NaN
+                if (isNaN(givenNums[i].value)) {
+                    goodNum = false;
+                    console.log(`ERROR: ${givenNums[i].value} is not a num`);
 
-        //check if it's now float
-        console.log(typeof a);
-        console.log(typeof b);
-        console.log(typeof c);
+                    break;
 
-        //assign underrroot to variable and test in console
-        let underRoot = b**2-4*a*c;;
+                //for each input, checks if there's an input
+                } else if (givenNums[i].value.trim() == "") {
+                    goodNum = false;
+                    console.log("ERROR: no num is written");
 
-        console.log(`Underroot value is: ${underRoot}`);
+                    break;
+           
+                //if there are no error, make goodNum true
+                } else {
+                    goodNum = true;
+                    console.log("Num is good");
+                    
+                }
+            }
 
-        //square root the underroot
-        let sqRoot = Math.sqrt(underRoot);
+            console.log(goodNum)
 
-        console.log(`Square root is: ${sqRoot}`);
+            if (goodNum == true) {
+                document.getElementById("numError").innerHTML=" "
+                calcRoots();
+            }
+            else {
+                document.getElementById("numError").innerHTML="Please enter a proper number in each box."
+                document.getElementById("answer").innerHTML=" "
+            }
 
-        //get the +ve and -ve numerator
-        let posNumer = -1*b+sqRoot;
-        let negNumer = -1*b-sqRoot;
+        }
 
-        console.log(`The +ve numer is: ${posNumer}`);
-        console.log(`The -ve numer is: ${negNumer}`);
+        function calcRoots() { 
+            //read values from text boxes
+            let aVal = document.getElementById("inputA").value;
+            let bVal = document.getElementById("inputB").value;
+            let cVal = document.getElementById("inputC").value;
 
-        //get denominator and confirm number
-        let denom = 2*a;
+            //test if values are correct
+            console.log(aVal)
+            console.log(bVal)
+            console.log(cVal)
 
-        console.log(`The denominator is: ${denom}`);
+            //convert string to float
+            let a = parseFloat(aVal);
+            let b = parseFloat(bVal);
+            let c = parseFloat(cVal);
 
-        //get roots, check if they're right, and display them
-        function displayRoots() {
+            //check if it's now float
+            console.log(typeof a);
+            console.log(typeof b);
+            console.log(typeof c);
+
+            //assign underrroot to variable and test in console
+            let underRoot = b**2-4*a*c;;
+
+            console.log(`Underroot value is: ${underRoot}`);
+
+            //square root the underroot
+            let sqRoot = Math.sqrt(underRoot);
+
+            console.log(`Square root is: ${sqRoot}`);
+
+            //get the +ve and -ve numerator
+            let posNumer = -1*b+sqRoot;
+            let negNumer = -1*b-sqRoot;
+
+            console.log(`The +ve numer is: ${posNumer}`);
+            console.log(`The -ve numer is: ${negNumer}`);
+
+            //get denominator and confirm number
+            let denom = 2*a;
+
+            console.log(`The denominator is: ${denom}`);
+
+            //get roots, check if they're right, and display them
+        
             let root1 = posNumer/denom;
             let root2 = negNumer/denom;
 
@@ -153,10 +202,29 @@
             console.log(`Root 1 is: ${root2}`);
 
             let display = `The roots are ${root1} and ${root2}.`;
+
+            if (isNaN(root1) && isNaN(root2)) {
+                console.log("No x-ints")
+                display = `This produces 2 non-real roots, and therefore has no x-intercepts.`;
+
+            } else if (root1 == root2){
+                console.log("1 x-int")
+                display = `There is only 1 x-intercept, which is ${root1}.`;
+
+            } else {
+                console.log("2 diff x-ints")
+                display = `The x-intercepts are ${root1} and ${root2}.`;
+
+            }
+
+            document.getElementById("answer").innerHTML = display; 
             
-            document.getElementById("answer").innerHTML = display;
+            // FOR TESTING
+            // Do a=1, b=-4, and c=4 to produce 1 x-int (2)
+            // Do a=3, b=-2, and c=12 to produce 0 x-ints
+
+     
         }
-        
     </script>
 </body>
 </html>

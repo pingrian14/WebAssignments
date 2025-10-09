@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tick3tShop</title>
+
+    <style>
+        body {
+            font-family: tahoma;
+            background-color: rgb(104, 159, 204);
+            margin:0;
+        }
+
+        input {
+            text-align:center;
+            font-weight: bold;
+            color:steelblue;
+        }
+
+        button {
+            font-family: verdana;
+            background-color:rgb(39, 80, 114);
+            color:white;
+            padding:12px;
+            margin:20px;
+        }
+
+        button:hover {
+            font-family: verdana;
+            background-color:rgb(44, 98, 141);
+            color:white;
+            padding:12px;
+            margin:20px;
+        }
+
+        .titleDiv {
+            width:auto;
+            height:fit-content;
+            padding:10px;
+            background-color:rgb(39, 80, 114);
+            color:white;
+            text-align:center;
+            font-family:verdana;
+        }
+
+        .detailsDiv {
+            width:auto;
+            height:fit-content;
+            padding:10px;
+            background-color:steelblue;   
+            color:white;
+            text-align:center;
+            font-family:verdana;
+            display:flex;
+            justify-content: space-between;     /*makes the 2 divs inside at the ends and puts space between*/
+
+        }
+
+        .imgDiv {
+            width: 250px;
+            margin-left:30px;
+            background-image:url(ticket.png);
+            background-repeat: no-repeat;
+            background-size: cover; /*makes img cover the entire div */
+
+        }
+
+        .descDiv {
+            /* background-color: green; */
+            margin-right:30px;
+            padding:10px;
+            text-align: left;
+            padding-left:30px;
+            
+
+        }
+
+        .getInputDiv {
+            background-color:white;
+            /* border:0.5px solid rgb(22, 45, 65); */
+            border-radius: 10px;
+            height:fit-content;
+            padding:10px;
+            margin:20px;
+
+        }
+
+        .underline {
+            text-decoration: underline solid;
+        }
+
+        .highlight {
+            background-color: #46EB9B;
+            width:fit-content;
+        }
+
+        .bold {
+            font-weight: bold;
+        }
+
+        .darkUnderline {
+            color:rgb(22, 45, 65);
+            text-decoration: underline solid;
+            margin:20px;
+        }
+
+        .error{
+            color:red;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="titleDiv">
+        <h1>Ticket Purchase</h1>
+    </div>
+    
+    <div class="detailsDiv">
+        <div class="imgDiv"></div>
+
+        <div class="descDiv">
+            <h3 class="underline">Price Listings (Age):</h3>
+            <p>18+ --&gt; $21</p>
+            <p>12 - 17 --&gt; $14</p>
+            <p>11 & Under --&gt; $7</p>
+            <p class="highlight">Females get a special discount!</p>
+        </div>
+    </div>
+    
+    <h3 class="darkUnderline">Enter your personal information below:</h3>
+    
+    <div class="getInputDiv">
+        <h4>Enter Your Age: </h4>
+        <input id="age"></input>
+        <h4 id="numError" class="error"></h4>
+    </div>
+
+    <div class="getInputDiv">
+        <h4>Select Your Gender:</h4>
+        <input id="gender1" type="radio" value="female" name="gender"></input>
+        <label for="gender2">Female</label><br>
+        <input id="gender2" type="radio" value="male" name="gender"></input>
+        <label for="gender2">Male</label><br>
+        <h4 id="genderError" class="error"></h4>
+    </div>
+
+        <button onclick="checkResponses()">Buy Ticket</button>
+
+    <div class="getInputDiv">
+        <h3 class="underline">Receipt</h3>
+        <p id="receiptAge">Buy a ticket first!</p>
+        <p id="receiptGender"></p>
+        <p id="receiptDiscount"></p>
+        <p id="receiptPrice" class="highlight"></p>
+        <br>
+        <p id="thanks" class="bold"></p>
+    </div>
+
+    <script>
+        
+        function checkResponses() {
+            let goodNum = confirmAgeIsNum();
+            let goodGender = confirmGender();
+
+            console.log(`Good age is ${goodNum}`)
+            console.log(`Good gender is ${goodGender}`)
+
+            if (goodNum == true && goodGender == true) {
+                checkPrice()
+            }
+        }
+        
+        function confirmAgeIsNum() {
+            let givenAge = document.getElementById("age").value;
+            let goodNum = false;
+
+            if (isNaN(givenAge)) {
+                numError();
+                console.log("ERROR: Age is not a num");
+
+            } else if (givenAge % 1 !== 0) {
+                numError();
+                console.log("ERROR: Age is a decimal");
+
+            } else if (givenAge <= 0) {
+                numError();;
+                console.log("ERROR: Age is -ve or 0")
+            
+            } else {
+                goodNum = true;
+                console.log("Age is good");
+                document.getElementById("numError").innerHTML=" "
+                
+            }
+
+            return goodNum;
+        }
+
+
+        function numError() {
+            document.getElementById("numError").innerHTML="Please enter a proper number."
+        }
+
+
+        function confirmGender() {
+            const genderList = document.getElementsByName('gender');
+            let selected = false;
+
+            for (let i = 0; i < genderList.length; i++) {
+                if (genderList[i].checked) {
+                    selected = true;
+                    console.log("checked")
+                    document.getElementById("genderError").innerHTML=` `
+
+                    break;
+                }
+            }
+
+            //display error if nothing is checked
+            if (selected == false) {
+                document.getElementById("genderError").innerHTML=`Please select an option.`
+            }
+            
+            return selected;
+        }
+
+
+        //calculates price based on age
+        function checkPrice() {
+            let age = document.getElementById("age").value;
+            let gender = document.querySelector('input[type="radio"]:checked').value;
+            
+            console.log(age);
+            console.log(gender);
+
+            let price; 
+
+            if (age >= 18 && gender == "female") {
+                price = 21;
+
+                let finalPrice = getDiscount(price,gender,age);
+                console.log(`Cost for ${age} yr old ${gender} is $${finalPrice}`);
+            
+            } else if (age >= 18 && gender == "male"){
+                price = 21;
+
+                let finalPrice = price;                    
+                console.log(`Cost for ${age} yr old ${gender} is $${finalPrice}`);
+                giveTicket(0,0,finalPrice,gender,age);
+            
+            } else if (age >= 12 && gender == "female") {
+                price = 14;
+                
+                let finalPrice = getDiscount(price,gender,age);
+                console.log(`Cost for ${age} yr old ${gender} is $${finalPrice}`);
+            
+            } else if (age >= 12 && gender == "male") {
+                price = 14;
+
+                let finalPrice = price;
+                console.log(`Cost for ${age} yr old ${gender} is $${finalPrice}`);
+                giveTicket(0,0,finalPrice,gender,age);
+            
+            } else if (age <= 11 && gender == "female") {
+                price = 7;
+                
+                let finalPrice = getDiscount(price,gender,age);
+                console.log(`Cost for ${age} yr old ${gender} is $${finalPrice}`);
+            
+            } else {
+                price = 7;
+
+                let finalPrice = price;
+                console.log(`Cost for ${age} yr old ${gender} is $${finalPrice}`);
+                giveTicket(0,0,finalPrice,gender,age);
+            }    
+        }
+
+        function getDiscount(mainPrice,gender,age) {
+            let discount = 25
+            let discountMoney = mainPrice * (discount/100)
+            cost = (mainPrice - discountMoney);
+
+            giveTicket(discount,discountMoney,cost,gender,age)
+
+            return cost;
+        }
+
+        function giveTicket(discount,moneyOff,cost,gender,age) {
+            console.log("works")
+            document.getElementById("receiptAge").innerHTML=`Age: ${age} years old`
+            document.getElementById("receiptGender").innerHTML=`Gender: ${gender}`
+            document.getElementById("receiptDiscount").innerHTML=`Discount: ${discount}% off --> $${moneyOff.toFixed(2)} off`
+            document.getElementById("receiptPrice").innerHTML=`Final Cost: $${cost.toFixed(2)}`
+            document.getElementById("thanks").innerHTML=`Thank you for purchasing your ticket at Tick3tShop and enjoy!`
+        }
+        
+    </script>
+</body>
+
+</html>

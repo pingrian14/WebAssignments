@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HiLo</title>
+
+    <style>
+        body{
+            background-color: lavenderblush;
+            font-family: tahoma;
+        }
+
+        .bigTexts {
+            font-family: verdana;
+            color:palevioletred;
+        }
+
+        .info {
+            width:fit-content;
+            padding:10px;
+            border:1px solid palevioletred;
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="bigTexts">You did it!</h1>
+    <div class="info">
+    <p id="correctNum"></p>
+    <p id="totalTries"></p>
+    </div>
+    <h4 class="bigTexts">Thank you for playing! To do this again, please refresh the page.</h4>
+
+    <script>
+        //generate the random num
+        let rn = Math.floor(Math.random() * 100) + 1;
+        console.log(`Random Num is ${rn}`);
+
+        //make a var for num of attempts
+        let times = 0;
+
+        //make var for user input
+        let guess = 0;
+
+        //repeats until the user guessed correctly
+        while (guess != rn) {
+            //asks for user input
+            guess = prompt("Please guess a number from 1 - 100 (inclusive, no decimals)");
+            console.log(`User's guess is ${guess}`)
+
+            if (isNaN(guess)) {
+                alert(`${guess} is not a number`);
+            } else if (guess.trim() == "") {
+                alert(`Please enter a number.`);
+            } else if (guess > rn) {
+                alert(`${guess} is higher than the number`);        //runs if guess is higher
+            } else if (guess < rn) {
+                alert(`${guess} is lower than the number`);         //runs if guess is lower
+            } else {
+                alert(`${guess} is the number!`);       //runs if guess is correct, then leaves loop
+            }
+
+            //adds 1 to thier num of attempts
+            times++;
+            console.log(`This is guess #${times}`)
+        
+        }
+
+        //displays details
+        document.getElementById("correctNum").innerHTML=`Correct Number: ${rn}`;
+        document.getElementById("totalTries").innerHTML=`Number of attempts: ${times}`;
+        
+        //runs when button is clicked
+        
+
+        
+    </script>
+</body>
+</html>

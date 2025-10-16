@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TallyHo</title>
+
+    <style>
+        body {
+            font-family: tahoma;
+        }
+
+        .randomNum {
+            background-color: lightpink;
+            width:25px;
+            padding:5px;
+            margin:0px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .average {
+            background-color: lightgreen;
+            width:fit-content;
+            padding: 8px;
+        }
+    </style>
+</head>
+<body>
+    
+    <script>
+        let times = 0;
+        let tally = 0.0;
+        let rn;
+        while(times < 10) {
+            rn = Math.floor(Math.random() * 10) + 1;
+            console.log(rn);
+
+            tally+=rn;
+            console.log(`The total num is ${tally}`);
+
+            displayValues(times,rn,tally)
+
+            times++;
+        }
+
+        console.log(`This ran ${times} times`);
+
+        let avg = tally / times;
+        console.log(`The avg is ${avg}`);
+
+        document.writeln(`<h3 class="average">The average of these numbers is ${avg}<h3>`);
+
+        function displayValues(times,num,tally) {
+            actualTime = times + 1;
+            document.writeln(`<h2>Round ${actualTime}:</h2>`);
+            document.writeln(`<h3 class="randomNum">${num}</h3>`);
+            document.writeln(`<p>The tally is currently at ${tally}.</p>`);
+        }
+    </script>
+</body>
+</html>

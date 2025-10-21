@@ -140,8 +140,13 @@
             document.getElementById("whoDidBetter").innerHTML=`The boys did better by about ${betterDifference.toFixed(2)}`;
         
         } else {
-            console.log(`Both. Same avg`);
-            document.getElementById("whoDidBetter").innerHTML=`The girls and boys got the same average marks.`;
+            if (isNaN(girlAvg) || isNaN(boyAvg)) { 
+                console.log(`One or both aren't filled`);
+
+            } else { 
+                console.log(`Both. Same avg`);
+                document.getElementById("whoDidBetter").innerHTML=`The girls and boys got the same average marks.`;
+            }
         }
         
         // check if avgs are numbers 

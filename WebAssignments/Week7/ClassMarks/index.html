@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class Marks (WL)</title>
+
+    <style>
+        body {
+            font-family: verdana;
+        }
+    </style>
+</head>
+<body>
+
+    <h1 title="This is calculated using a while loop">Class Marks</h1>
+    
+    <h3>Girls</h3>
+    <p id="numOfGirls"></p>
+    <p id="tallyOfGirls"></p>
+    <p id="avgOfGirls"></p>
+
+    <br>
+
+    <h3>Boys</h3>
+    <p id="numOfBoys"></p>
+    <p id="tallyOfBoys"></p>
+    <p id="avgOfBoys"></p>
+    
+    <br>
+    
+    <h3>Overall Details</h3>
+    <p id="numOfStudents"></p>
+    <p id="whoDidBetter"></p>
+    
+    
+    <script>
+        // variables for the girl and boy's current mark
+        let girlMark = 0;
+        let boyMark = 0;
+
+        // variables for num of girls and boys
+        let totalGirl = 0;
+        let totalBoy = 0;
+
+        // variables for the accumulators of the girls and boy's marks
+        let tallyGirls = 0;
+        let tallyBoys = 0;
+
+        // makes a variable for the input
+        let gender = ""
+
+        // makes var for the avgs
+        let girlAvg = 0;
+        let boyAvg = 0;
+
+        //makes var for total num of students
+        let totalStudents = 0;
+
+        //makes var for the difference in avgs
+        let betterDifference = 0;
+
+        // asks for user input until they want to quit
+        while (gender != "q") {
+            gender = prompt(`Enter "g" for girl, "b" for boy, and "q" to quit`);
+            console.log(`Selected choice was is ${gender}`);
+
+            //runs if gender is g
+            if (gender == "g") {
+                //get the girl's mark
+                girlMark = prompt("Enter the marks this girl got:");
+                
+                // make the input a float
+                girlMark = parseFloat(girlMark);
+                console.log(`Current girl's mark: ${girlMark}`);
+
+                // add the mark to the accumulator
+                tallyGirls += girlMark;
+                console.log(`Girls' total marks: ${tallyGirls}`);
+
+                totalGirl++;
+                console.log(`Num of Girls: ${totalGirl}`);
+
+            //runs if gender is b
+            } else if (gender == "b") {
+                // get the boy's mark
+                boyMark = prompt("Enter the marks this boy got:");
+
+                // makes the input a float
+                boyMark = parseFloat(boyMark);
+                console.log(`Current boy's mark: ${boyMark}`);
+
+                // add the mark to the accumulator
+                tallyBoys += boyMark;
+                console.log(`Boys' total marks: ${tallyBoys}`);
+
+                totalBoy++;
+                console.log(`Num of Boys: ${totalBoy}`);
+            
+        // runs if q is pressed
+        } else if (gender =="q") { 
+            alert(`Exiting Program...`);
+        
+        // runs if the user didn't type any of the options
+        } else {
+                alert(`${gender} is not an option`);
+            }
+        }
+
+        //calc the avg of the girls and boys' marks
+        girlAvg = tallyGirls / totalGirl;
+        console.log(`Girl avg: ${girlAvg}`);
+
+        boyAvg = tallyBoys / totalBoy;
+        console.log(`Boy avg: ${boyAvg}`);
+
+        // displays the girls' stats
+        document.getElementById("numOfGirls").innerHTML=`Total # of Girls: ${totalGirl}`;
+        document.getElementById("tallyOfGirls").innerHTML=`Total Marks: ${tallyGirls}`;
+        document.getElementById("avgOfGirls").innerHTML=`Average Mark: ${girlAvg.toFixed(2)}`;
+
+        // displays the boys' stats
+        document.getElementById("numOfBoys").innerHTML=`Total # of Boys: ${totalBoy}`;
+        document.getElementById("tallyOfBoys").innerHTML=`Total Marks: ${tallyBoys}`;
+        document.getElementById("avgOfBoys").innerHTML=`Average Mark: ${boyAvg.toFixed(2)}`;
+
+        // displays num of students
+        totalStudents = totalBoy + totalGirl;
+        document.getElementById("numOfStudents").innerHTML=`Total # of Students: ${totalStudents}`;
+
+        // check who did better in terms of the avg
+        if (girlAvg > boyAvg) {
+            betterDifference = girlAvg - boyAvg;
+            console.log(`Girls.The difference between the two: ${betterDifference}`);
+            document.getElementById("whoDidBetter").innerHTML=`The girls did better by about ${betterDifference.toFixed(2)}`;
+        
+        } else if (boyAvg > girlAvg) {
+            betterDifference = boyAvg - girlAvg;
+            console.log(`Boys. The difference between the two: ${betterDifference}`);
+            document.getElementById("whoDidBetter").innerHTML=`The boys did better by about ${betterDifference.toFixed(2)}`;
+        
+        } else {
+            console.log(`Both. Same avg`);
+            document.getElementById("whoDidBetter").innerHTML=`The girls and boys got the same average marks.`;
+        }
+        
+        // check if avgs are numbers 
+        if (isNaN(girlAvg)) {
+            document.getElementById("avgOfGirls").innerHTML=`Average Mark: NA`;
+        }
+
+        if (isNaN(boyAvg)) {
+            document.getElementById("avgOfBoys").innerHTML=`Average Mark: NA`;
+        }
+      
+    </script>
+</body>
+</html>

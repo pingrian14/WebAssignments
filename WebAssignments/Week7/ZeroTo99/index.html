@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter</title>
+
+    <style>
+        body {
+            font-family: tahoma;
+            color:rgb(58, 58, 58)
+        }
+
+        .underline {
+            color:black;
+            text-decoration: underline solid black;
+        }
+
+    </style>
+</head>
+<body>
+    <h1 class="underline">Numbers</h1>
+    <script>
+
+        document.writeln("<h2>Numbers 0 - 99</h2>");
+
+        
+        //the tens of the number
+        for (let tens = 0; tens < 10; tens++) {
+
+            //the ones of the number, places after the tens
+            for (let ones = 0; ones < 10; ones++) {
+                document.writeln(tens + "" + ones);
+            }
+
+            //makes the next tens appear on a new line
+            document.writeln("<br>");
+        }
+
+        document.writeln("<br>");
+
+        document.writeln("<h2>Numbers 99 - 0</h2>");
+
+        //the tens of the number
+        for (let tens = 9; tens >= 0; tens--) {
+
+            //the ones of the number, places after the tens
+            for (let ones = 9; ones >= 0; ones--) {
+                document.writeln(tens + "" + ones);
+            }
+
+            //makes the next tens appear on a new line
+            document.writeln("<br>");
+        }
+
+        document.writeln("<br>");
+
+        document.writeln("<h2>Numbers 0 - 98 (EVEN)</h2>");
+
+        //the tens of the number
+        for (let tens = 0; tens < 10; tens++) {
+
+            //the ones of the number, places after the tens, but only even #s
+            for (let ones = 0; ones < 10; ones+=2) {
+                document.writeln(tens + "" + ones);
+            }
+
+            //makes the next tens appear on a new line
+            document.writeln("<br>");
+        }
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapping Array of Prices</title>
+    <style>
+        body {
+            font-family: tahoma;
+            background-color:rgb(245, 245, 245);
+        }
+
+        button {
+            padding:8px;
+            border-radius: 10px;
+        }
+
+        .info {
+            border:1px solid black;
+            padding:8px;
+            width:700px;
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+    
+    <h1>Mapping Arrays of Prices</h1>
+    
+    <div class="info">
+        <h3>Here are the given prices:</h3>
+        <p id="originalPrice"></p>
+    </div>
+
+    <br>
+
+    <div class="info">
+        <h3>These ones have tax on them:</h3>
+        <p id="taxedPrice"></p>
+    </div>
+
+    <br>
+
+    <div class="info">
+        <h3>Formatted Version:</h3>
+        <p id="formattedPrice"></p>
+    </div>
+
+    <br>
+
+    <div class="info">
+        <h3>I wonder what this does...</h3>
+        <button onclick="getDiscount()">??</button>
+    
+        <h3 id="discountNotif"></h3>
+        <p id="discountedPrice"></p>
+    </div>
+
+    <script>
+        //the orignal list of prices & tax
+        let prices=[12.98,14.20,5.86,9.25,14.7];
+        let tax = 1.13;
+
+        //gets the taxed ver of each index element in price
+        let taxed = prices.map(function(price)
+        {
+            return price*tax;
+        }   );
+
+        //displays taxed prices in console
+        console.log(taxed)
+
+
+        //gets the formatted ver of each index element in taxed
+        let formatted = taxed.map(function(price) 
+        {
+            return `$${Math.round(price*100)/100}`;
+        }   );
+
+        //displays formatted prices in console
+        console.log(formatted);
+
+
+        document.getElementById("originalPrice").innerHTML=prices;
+        document.getElementById("taxedPrice").innerHTML=taxed;
+        document.getElementById("formattedPrice").innerHTML=formatted;
+
+        //gets the discount of the original price and adds tax
+        function getDiscount() {
+            let discount = 0.75;
+            let discounted = prices.map(function(price)
+            {
+                //get the discounted price (25% off) then add tax
+                price = (price*discount)*tax;
+                //formats the price
+                price = `$${Math.round(price*100)/100}`;
+
+                return price;
+            });
+
+            console.log(discounted);
+            document.getElementById("discountNotif").innerHTML="Congrats, you just got a 25% discount!<br>You're still paying for tax though:";
+            document.getElementById("discountedPrice").innerHTML=discounted;
+            
+        }
+    </script>
+</body>
+</html>

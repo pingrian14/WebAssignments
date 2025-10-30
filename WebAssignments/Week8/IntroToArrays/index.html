@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrays</title>
+</head>
+<body>
+    <h1>Trick or Treat</h1>
+    <h3>Here are a list of houses in the vicinity. Choose the one you want to go to.</h3>
+
+    <label for="inputHouse">Enter the house # of the house you want to try your luck at:</label>
+    <input id="inputHouse">
+    <button id="specificHouse" onclick="visitHouse()">Go</button>
+
+    <br>
+
+    <label for="randomButton">Click the button to try getting candy at a random house:</label>
+    <button id="randomButton" onclick="randomHouse()">Randomize</button>
+
+    <p id="destination"></p>
+
+    <script>
+        let people = ["Rianna", "Hayley", "Andi", "Jill", "Celina", "Sebastian", "Ascear", "Shane", "Aaron"];
+            let totalPeople = people.length;
+        
+            console.log(totalPeople, "people");
+        
+            for (let x=0; x < totalPeople; x++) {
+            document.writeln(`House ${x+1} is ${people[x]}'s house. <br>`);
+        }
+
+        function visitHouse() {
+
+            let chosenHouseNum = getElementById("specificHouse").value;
+            let chosenHousePerson = people[chosenHouseNum];
+
+            console.log(`Chose house #${chosenHouseNum+1}, ${chosenHousePerson}'s house`)
+        }
+
+        function randomHouse() {
+
+            console.log("works")
+            let rn = Math.floor(Math.random() * totalPeople);
+            chosen = people[rn];
+            console.log("The random num is", rn);
+
+            document.getElementById("destination").innerHTML=`You go to ${chosen}'s house.`;
+        }
+
+
+    </script>
+</body>
+</html>

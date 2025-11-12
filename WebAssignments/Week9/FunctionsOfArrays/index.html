@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testing Functions of Arrays</title>
+</head>
+<body>
+    <h1>Functions of the Arrays</h1>
+
+    <h3>Animals</h3>
+    <p id="showAnimals"></p>
+
+    <label for="enterAnimal">Enter another animal:</label>
+    <input id="enterAnimal">
+    <button onclick="submitAnimalEnd()">To End</button>
+    <button onclick="submitAnimalStart()">To Start</button>
+
+    <br>
+
+    <label>Remove the Last Animal:</label>
+    <button onclick="deleteAnimalEnd()">Delete End</button>
+    <button onclick="deleteAnimalStart()">Delete Start</button>
+
+    <br>
+
+    <label for="enterIndex">Locate animal:</label>
+    <input id="enterIndex">
+    <button onclick="findAnimal()">Find</button>
+    <p id="animalLocation"></p>
+
+    <br>
+
+    <h3>Numbers</h3>
+    <p id="showNumbers"></p>
+
+    <label>Get specifics of the list (slice)</label>
+    <button onclick="sliceList()">Slice</button>
+
+    <script>
+        let animals = ["Panda", "Hippo", "Giraffe", "Turkey", "Bear", "Bunny"];
+        document.getElementById("showAnimals").innerHTML=animals;
+
+        let numbers = [8, 25, 27, 12, 20, 13, 22, 18];
+        document.getElementById("showNumbers").innerHTML=numbers;
+
+        //function that gets animal inputted and adds it to the end of the array
+        function submitAnimalEnd() {
+            let inputted = document.getElementById("enterAnimal").value;
+            console.log(inputted);
+
+            //push adds it to the end; changes the ORIGINAL array
+            animals.push(inputted);
+            document.getElementById("showAnimals").innerHTML=animals;
+        }
+
+        //function that gets animal inputted and adds it to the end of the array
+        function submitAnimalStart() {
+            let inputted = document.getElementById("enterAnimal").value;
+            console.log(inputted);
+
+            animals.unshift(inputted);
+            document.getElementById("showAnimals").innerHTML=animals;
+        }
+
+        //function that deletes the animal at the end of the array
+        function deleteAnimalEnd() {
+            //pop removed the last; changes the ORIGINAL array
+            animals.pop();
+            document.getElementById("showAnimals").innerHTML=animals;
+        }
+
+        //function that deletes the animal at the start of the array
+        function deleteAnimalStart() {
+            //pop removed the last; changes the ORIGINAL array
+            animals.shift();
+            document.getElementById("showAnimals").innerHTML=animals;
+        }
+
+        function findAnimal() {
+            let inputted = document.getElementById("enterIndex").value;
+            console.log(inputted);
+
+            //push adds it to the end; changes the ORIGINAL array
+            if (isNaN(inputted)) {
+                inputted = inputted.charAt(0).toUpperCase() + inputted.slice(1).toLowerCase();
+                console.log(`Proper case: ${inputted}`)
+                
+                if (animals.includes(inputted) == true) {
+                    let location = animals.indexOf(inputted);
+                    if (location != -1) {
+                        document.getElementById("animalLocation").innerHTML=`${inputted} is #${location+1} of the list (index ${location}).`
+                    } 
+                } else {
+                    document.getElementById("animalLocation").innerHTML=`${inputted} isn't listed above.`
+                }
+            //ADD AN ELSE FOR ANY POSSIBLE ERRORS
+            
+            document.getElementById("showAnimals").innerHTML=animals;
+        }
+
+        function sliceList() {
+            let length = numbers.length;
+            let start = Math.floor(Math.random() * length) + 1;
+            let end = Math.floor(Math.random() * length) + 1;;
+        }
+    }
+
+    </script>
+</body>
+</html>

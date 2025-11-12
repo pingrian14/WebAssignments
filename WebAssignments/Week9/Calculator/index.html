@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Basic Calculator</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      text-align: center;
+      margin-top: 40px;
+      background-color: #f2f2f2;
+    }
+
+
+
+
+    h1 {
+      color: #333;
+    }
+
+
+    /* background: linear-gradient(180deg, #4CAF50 0%, #388E3C 100%); */
+    /* Base button style */
+    button {
+      background: linear-gradient(180deg, #d5d5d5 0%, #9b9b9b 100%);
+      border: none;
+      color: black;
+      /* padding: 18px 40px; */
+      width:80px;
+      height:65px;
+      margin:5px;
+      font-size: 20px;
+      cursor: pointer;
+      border-radius: 10px;
+      transition:
+        background 0.3s ease,
+        transform 0.1s ease,
+        box-shadow 0.1s ease;
+      box-shadow: 0 6px #686868;
+    }
+
+
+    /* for operation buttons  */
+    .buttonOp {
+      background: linear-gradient(180deg, #b9b4a6 0%, #959185 100%);
+      /* background: linear-gradient(180deg, #4CAF50 0%, #388E3C 100%); */
+      border: none;
+      color: black;
+      /* padding: 18px 40px; */
+      width:80px;
+      height:50px;
+      margin:5px;
+      font-size: 20px;
+      cursor: pointer;
+      border-radius: 10px;
+      transition:
+        background 0.3s ease,
+        transform 0.1s ease,
+        box-shadow 0.1s ease;
+      box-shadow: 0 6px #6a675f;
+    }
+
+
+    /* for clear button */
+    .buttonCl {
+      background: linear-gradient(180deg, #a9b9a6 0%, #7b8678 100%);
+      border: none;
+      font-weight: bold;
+      color: black;
+      /* padding: 18px 40px; */
+      width:80px;
+      height:65px;
+      margin:5px;
+      font-size: 20px;
+      cursor: pointer;
+      border-radius: 10px;
+      transition:
+        background 0.3s ease,
+        transform 0.1s ease,
+        box-shadow 0.1s ease;
+      box-shadow: 0 6px #4b4b4b;
+    }
+
+
+
+
+    /* Hover effect */
+    button:hover {
+      background: linear-gradient(180deg, #ebe8e5 0%, #abaaa7 100%);
+      box-shadow: 0 8px #636361;
+    }
+
+
+    /* Pressed effect */
+    button:active {
+      transform: translateY(4px);
+      box-shadow: 0 3px #5a5957;
+      background: linear-gradient(180deg, #dad7d4 0%, #8d8c89 100%);
+    }
+
+
+    .outsideCalculatorBody {
+        display: flex;
+        justify-content: center;
+    }
+   
+    .calculatorBody {
+        background: linear-gradient(180deg, #484848 0%, #2f2f2f 100%);
+        box-shadow: 4px 10px #000000;
+        border-radius: 20px;
+
+
+        width:412px;
+        height:413px;
+    }
+
+
+    .calcOutput {
+        background: linear-gradient(180deg, #a9b9a6 0%, #7b8678 100%);
+        box-shadow: 0 6px #202020;
+
+
+        border:4px solid black;
+        margin-top:20px;
+        margin-left:15px;
+        padding-right: 8px;
+        width:88%;
+        height:50px;
+
+
+        display: flex;
+        align-items:center;
+        justify-content:flex-end ;
+        font-size: 22px;
+    }
+
+
+    .calcRow {
+        display:flex;
+        justify-content: center;
+    }
+
+
+    .calcWithoutOutput {
+        display: flex;
+        justify-content: center;
+        margin-top:6px;
+    }
+
+
+    .calcNumbers {
+        padding:10px;
+    }
+
+
+    .calcOperators {
+        /* display:flex;
+        justify-content: center; */
+        padding:10px;
+    }
+
+
+  </style>
+</head>
+<body>
+   
+    <h1>Basic Calculator</h1>
+
+
+    <div class="outsideCalculatorBody">
+
+
+    <div class="calculatorBody">
+       
+        <div class=calcOutput>
+            <!-- Number appears here -->
+            <h3 id="output"></h3>
+        </div>
+ 
+
+
+        <div class="calcWithoutOutput">
+           
+        <div class="calcNumbers">
+        <!-- numbers, decimal, and clear button -->
+        <div class=calcRow>
+            <!-- 7-9 -->
+            <button id="button7">7</button>
+            <button id="button8">8</button>
+            <button id="button9">9</button>
+        </div>
+       
+        <div class=calcRow>
+            <!-- 4-6 -->
+            <button id="button4">4</button>
+            <button id="button5">5</button>
+            <button id="button6">6</button>
+        </div>
+       
+        <div class=calcRow>
+            <!-- 1-3 -->
+            <button id="button1">1</button>
+            <button id="button2">2</button>
+            <button id="button3">3</button>
+        </div>
+       
+        <div class=calcRow>
+            <!-- 0 and decimal -->
+            <button id="decimalButton">.</button>
+            <button id="button0">0</button>
+            <button id="clearButton" class="buttonCl">C</button>
+        </div>
+        </div>
+       
+
+
+        <div class=calcOperators>
+            <!-- operators and equal button -->
+   
+            <button id="plus" class="buttonOp">+</button>
+            <button id="subtract" class="buttonOp">-</button>
+            <button id="multiply" class="buttonOp">x</button>
+            <button id="divide" class="buttonOp">/</button>
+            <button id="equal" class="buttonOp">=</button>
+        </div>
+   
+       
+        </div>
+    </div>
+
+
+
+
+ 
+
+
+
+
+  <!-- Sound effect -->
+  <audio id="clickSound" src="click-keyboard.mp3"></audio>
+  <audio id="clearSound" src="send-whoosh.mp3"></audio>
+  <audio id="equalSound" src="enter-click.mp3"></audio>
+
+
+    </div>
+    </div>
+
+
+  <script>
+    let num1="NA";
+    let num2="NA";
+    let operator = "";
+    let answer = 0;
+
+
+
+
+    const buttonC = document.getElementById("clearButton");
+    buttonC.addEventListener("click", clear);
+
+
+
+
+    const button0 = document.getElementById("button0");
+    button0.addEventListener("click", display0);
+
+
+
+
+    const button1 = document.getElementById("button1");
+    button1.addEventListener("click", display1);
+
+
+
+
+    const button2 = document.getElementById("button2");
+    button2.addEventListener("click", display2);
+
+
+
+
+    const button3 = document.getElementById("button3");
+    button3.addEventListener("click", display3);
+
+
+
+
+    const button4 = document.getElementById("button4");
+    button4.addEventListener("click", display4);
+
+
+
+
+    const button5 = document.getElementById("button5");
+    button5.addEventListener("click", display5);
+
+
+
+
+    const button6 = document.getElementById("button6");
+    button6.addEventListener("click", display6);
+
+
+
+
+    const button7 = document.getElementById("button7");
+    button7.addEventListener("click", display7);
+
+
+
+
+    const button8 = document.getElementById("button8");
+    button8.addEventListener("click", display8);
+
+
+
+
+    const button9 = document.getElementById("button9");
+    button9.addEventListener("click", display9);
+
+
+
+
+    const buttonDecimal = document.getElementById("decimalButton");
+    buttonDecimal.addEventListener("click", displayDecimal);
+
+
+
+
+    //for the operators and equal
+    const plus = document.getElementById("plus");
+    plus.addEventListener("click", add);
+
+
+
+
+    const minus = document.getElementById("subtract");
+    minus.addEventListener("click", subtract);
+
+
+
+
+    const times = document.getElementById("multiply");
+    times.addEventListener("click", multiply);
+
+
+
+
+    const division = document.getElementById("divide");
+    division.addEventListener("click", divide);
+
+
+
+
+    const equal = document.getElementById("equal");
+    equal.addEventListener("click", equals);
+
+
+
+
+    //functions for numbers, decimal, and clearing the screen
+    function clear() {
+        console.log("Clear Screen")
+        document.getElementById("output").innerHTML="";
+
+
+        //resets num1 and num2 so they can take new values
+        num1="NA";
+        num2="NA";
+    }
+
+
+
+
+    function display0() {
+        checkIfNaN();
+        document.getElementById("output").innerHTML+=0;
+    }
+
+
+    function display1() {
+        checkIfNaN();
+        document.getElementById("output").innerHTML+=1;
+    }
+
+
+    function display2() {
+        checkIfNaN();
+        document.getElementById("output").innerHTML+=2;
+    }
+
+
+    function display3() {
+        checkIfNaN();
+        document.getElementById("output").innerHTML+=3;
+    }
+
+
+    function display4() {
+        checkIfNaN();
+        document.getElementById("output").innerHTML+=4;
+    }
+
+
+    function display5() {
+        checkIfNaN();
+        document.getElementById("output").innerHTML+=5;
+    }
+
+
+    function display6() {
+        checkIfNaN();
+        document.getElementById("output").innerHTML+=6;
+    }
+
+
+    function display7() {
+        checkIfNaN();
+        document.getElementById("output").innerHTML+=7;
+    }
+
+
+    function display8() {
+        checkIfNaN();
+        document.getElementById("output").innerHTML+=8;
+    }
+
+
+    function display9() {
+        checkIfNaN();
+        document.getElementById("output").innerHTML+=9;
+    }
+
+
+    function displayDecimal() {
+        checkIfNaN();
+        document.getElementById("output").innerHTML+=".";
+    }
+
+
+    // functions for operators and equals
+    function add() {
+        console.log("plus")
+        operator = "+";
+
+
+        checkNum();
+        document.getElementById("output").innerHTML="";
+    }
+
+
+
+
+    function subtract() {
+        console.log("subtract")
+        operator = "-";
+
+
+        checkNum();
+        document.getElementById("output").innerHTML="";
+    }
+
+
+
+
+    function multiply() {
+        console.log("multiply")
+        operator = "x";
+
+
+        checkNum();
+        document.getElementById("output").innerHTML="";
+    }
+
+
+
+
+    function divide() {
+        console.log("divide")
+        operator = "/";
+
+
+        checkNum();
+        document.getElementById("output").innerHTML="";
+    }
+
+
+
+
+    function equals() {
+        console.log("equals");
+        console.log(operator);
+        checkNum();
+
+
+        console.log(`Num 1: ${num1}   Num 2: ${num2}`);
+
+
+            //checks what the operator is and follows what it is
+            if (operator == "+") {
+                console.log(`${num1} + ${num2}`);
+                answer = parseFloat(num1) + parseFloat(num2);
+
+
+            } else if (operator == "-"){
+                console.log(`${num1} - ${num2}`);
+                answer = parseFloat(num1) - parseFloat(num2);
+
+
+            } else if (operator == "x"){
+                console.log(`${num1} x ${num2}`);
+                answer = parseFloat(num1) * parseFloat(num2);
+
+
+            } else if (operator == "/"){
+                console.log(`${num1} / ${num2}`);
+                answer = parseFloat(num1) / parseFloat(num2);
+                 
+            }
+
+
+            //displays answer after doing the math
+            displayAnswer(answer);
+         
+     
+    }
+
+
+    //checks if they inputted the first or second number
+    function checkNum() {
+        if (num1=="NA") {
+            num1 = document.getElementById("output").innerHTML;
+            console.log(`num1 is${num1}`)
+        } else if (num1!=="NA") {
+            console.log("num2");
+            num2 = document.getElementById("output").innerHTML;
+        }
+    }
+
+
+    // check if result is NaN or Infinity, if it is, clear the screen
+    function checkIfNaN() {
+        let check = document.getElementById("output").innerHTML;
+        if (isNaN(check)) {
+            clear();
+        } else if (check == "Infinity") {
+            clear();
+        }
+    }
+
+
+    //displays answer
+    function displayAnswer(answer) {
+        console.log(`= ${answer}`);
+
+        if (isNaN(answer)) {
+            answer = "ERROR";
+        } else if (answer=="Infinity") {
+            answer = "Undefined";
+        }
+        document.getElementById("output").innerHTML=answer;
+       
+        //resets num1 and num2 so they can take new values
+        num1="NA";
+        num2="NA";
+    }
+
+
+
+
+    // sounds effects for button 0
+    let clickSound = document.getElementById("clickSound");
+    let clearSound = document.getElementById("clearSound");
+    let equalSound = document.getElementById("equalSound");
+
+
+    // Mouse over
+    button0.addEventListener("mouseover", function() {
+      button0.classList.add("hovered");
+    });
+
+
+    // Mouse out
+    button0.addEventListener("mouseout", function() {
+      button0.classList.remove("hovered");
+    });
+
+
+    // Mouse down (pressed)
+    button0.addEventListener("mousedown", function() {
+      button0.classList.add("pressed");
+      clickSound.currentTime = 0; // rewind sound
+      clickSound.play();          // play sound
+    });
+
+
+    // Mouse up (release)
+    button0.addEventListener("mouseup", function() {
+      button0.classList.remove("pressed");
+      button0.classList.add("flash");
+      setTimeout(() => button0.classList.remove("flash"), 300);
+    });
+
+
+    // sounds effects for button 1
+    // Mouse over
+    button1.addEventListener("mouseover", function() {
+      button1.classList.add("hovered");
+    });
+
+
+    // Mouse out
+    button1.addEventListener("mouseout", function() {
+      button1.classList.remove("hovered");
+    });
+
+
+    // Mouse down (pressed)
+    button1.addEventListener("mousedown", function() {
+      button1.classList.add("pressed");
+      clickSound.currentTime = 0; // rewind sound
+      clickSound.play();          // play sound
+    });
+
+
+    // Mouse up (release)
+    button1.addEventListener("mouseup", function() {
+      button1.classList.remove("pressed");
+      button1.classList.add("flash");
+      setTimeout(() => button1.classList.remove("flash"), 300);
+    });
+
+
+    // sounds effects for button 2
+    // Mouse over
+    button2.addEventListener("mouseover", function() {
+      button2.classList.add("hovered");
+    });
+
+
+    // Mouse out
+    button2.addEventListener("mouseout", function() {
+      button2.classList.remove("hovered");
+    });
+
+
+    // Mouse down (pressed)
+    button2.addEventListener("mousedown", function() {
+      button2.classList.add("pressed");
+      clickSound.currentTime = 0; // rewind sound
+      clickSound.play();          // play sound
+    });
+
+
+    // Mouse up (release)
+    button2.addEventListener("mouseup", function() {
+      button2.classList.remove("pressed");
+      button2.classList.add("flash");
+      setTimeout(() => button2.classList.remove("flash"), 300);
+    });
+
+
+    // sounds effects for button 3
+    // Mouse over
+    button3.addEventListener("mouseover", function() {
+      button3.classList.add("hovered");
+    });
+
+
+    // Mouse out
+    button3.addEventListener("mouseout", function() {
+      button3.classList.remove("hovered");
+    });
+
+
+    // Mouse down (pressed)
+    button3.addEventListener("mousedown", function() {
+      button3.classList.add("pressed");
+      clickSound.currentTime = 0; // rewind sound
+      clickSound.play();          // play sound
+    });
+
+
+    // Mouse up (release)
+    button3.addEventListener("mouseup", function() {
+      button3.classList.remove("pressed");
+      button3.classList.add("flash");
+      setTimeout(() => button3.classList.remove("flash"), 300);
+    });
+
+
+    // sounds effects for button 4
+    // Mouse over
+    button4.addEventListener("mouseover", function() {
+      button4.classList.add("hovered");
+    });
+
+
+    // Mouse out
+    button4.addEventListener("mouseout", function() {
+      button4.classList.remove("hovered");
+    });
+
+
+    // Mouse down (pressed)
+    button4.addEventListener("mousedown", function() {
+      button4.classList.add("pressed");
+      clickSound.currentTime = 0; // rewind sound
+      clickSound.play();          // play sound
+    });
+
+
+    // Mouse up (release)
+    button4.addEventListener("mouseup", function() {
+      button4.classList.remove("pressed");
+      button4.classList.add("flash");
+      setTimeout(() => button4.classList.remove("flash"), 300);
+    });
+
+
+    // sounds effects for button 5
+    // Mouse over
+    button5.addEventListener("mouseover", function() {
+      button5.classList.add("hovered");
+    });
+
+
+    // Mouse out
+    button5.addEventListener("mouseout", function() {
+      button5.classList.remove("hovered");
+    });
+
+
+    // Mouse down (pressed)
+    button5.addEventListener("mousedown", function() {
+      button5.classList.add("pressed");
+      clickSound.currentTime = 0; // rewind sound
+      clickSound.play();          // play sound
+    });
+
+
+    // Mouse up (release)
+    button5.addEventListener("mouseup", function() {
+      button5.classList.remove("pressed");
+      button5.classList.add("flash");
+      setTimeout(() => button5.classList.remove("flash"), 300);
+    });
+
+
+    // sounds effects for button 6
+    // Mouse over
+    button6.addEventListener("mouseover", function() {
+      button6.classList.add("hovered");
+    });
+
+
+    // Mouse out
+    button6.addEventListener("mouseout", function() {
+      button6.classList.remove("hovered");
+    });
+
+
+    // Mouse down (pressed)
+    button6.addEventListener("mousedown", function() {
+      button6.classList.add("pressed");
+      clickSound.currentTime = 0; // rewind sound
+      clickSound.play();          // play sound
+    });
+
+
+    // Mouse up (release)
+    button6.addEventListener("mouseup", function() {
+      button6.classList.remove("pressed");
+      button6.classList.add("flash");
+      setTimeout(() => button6.classList.remove("flash"), 300);
+    });
+
+
+    // sounds effects for button 7
+    // Mouse over
+    button7.addEventListener("mouseover", function() {
+      button7.classList.add("hovered");
+    });
+
+
+    // Mouse out
+    button7.addEventListener("mouseout", function() {
+      button7.classList.remove("hovered");
+    });
+
+
+    // Mouse down (pressed)
+    button7.addEventListener("mousedown", function() {
+      button7.classList.add("pressed");
+      clickSound.currentTime = 0; // rewind sound
+      clickSound.play();          // play sound
+    });
+
+
+    // Mouse up (release)
+    button7.addEventListener("mouseup", function() {
+      button7.classList.remove("pressed");
+      button7.classList.add("flash");
+      setTimeout(() => button7.classList.remove("flash"), 300);
+    });
+
+
+    // sounds effects for button 8
+    // Mouse over
+    button8.addEventListener("mouseover", function() {
+      button8.classList.add("hovered");
+    });
+
+
+    // Mouse out
+    button8.addEventListener("mouseout", function() {
+      button8.classList.remove("hovered");
+    });
+
+
+    // Mouse down (pressed)
+    button8.addEventListener("mousedown", function() {
+      button8.classList.add("pressed");
+      clickSound.currentTime = 0; // rewind sound
+      clickSound.play();          // play sound
+    });
+
+
+    // Mouse up (release)
+    button8.addEventListener("mouseup", function() {
+      button8.classList.remove("pressed");
+      button8.classList.add("flash");
+      setTimeout(() => button8.classList.remove("flash"), 300);
+    });
+
+
+    // sounds effects for button 9
+    // Mouse over
+    button9.addEventListener("mouseover", function() {
+      button9.classList.add("hovered");
+    });
+
+
+    // Mouse out
+    button9.addEventListener("mouseout", function() {
+      button9.classList.remove("hovered");
+    });
+
+
+    // Mouse down (pressed)
+    button9.addEventListener("mousedown", function() {
+      button9.classList.add("pressed");
+      clickSound.currentTime = 0; // rewind sound
+      clickSound.play();          // play sound
+    });
+
+
+    // Mouse up (release)
+    button9.addEventListener("mouseup", function() {
+      button9.classList.remove("pressed");
+      button9.classList.add("flash");
+      setTimeout(() => button9.classList.remove("flash"), 300);
+    });
+
+
+    // sounds effects for clear button
+    // Mouse over
+    buttonC.addEventListener("mouseover", function() {
+      buttonC.classList.add("hovered");
+    });
+
+
+    // Mouse out
+    buttonC.addEventListener("mouseout", function() {
+      buttonC.classList.remove("hovered");
+    });
+
+
+    // Mouse down (pressed)
+    buttonC.addEventListener("mousedown", function() {
+      buttonC.classList.add("pressed");
+      clearSound.currentTime = 0; // rewind sound
+      clearSound.play();          // play sound
+    });
+
+
+    // Mouse up (release)
+    buttonC.addEventListener("mouseup", function() {
+      buttonC.classList.remove("pressed");
+      buttonC.classList.add("flash");
+      setTimeout(() => buttonC.classList.remove("flash"), 300);
+    });
+
+
+    // sounds effects for decimal button
+    // Mouse over
+    buttonDecimal.addEventListener("mouseover", function() {
+      buttonDecimal.classList.add("hovered");
+    });
+
+
+    // Mouse out
+    buttonDecimal.addEventListener("mouseout", function() {
+      buttonDecimal.classList.remove("hovered");
+    });
+
+
+    // Mouse down (pressed)
+    buttonDecimal.addEventListener("mousedown", function() {
+      buttonDecimal.classList.add("pressed");
+      clickSound.currentTime = 0; // rewind sound
+      clickSound.play();          // play sound
+    });
+
+
+    // Mouse up (release)
+    buttonDecimal.addEventListener("mouseup", function() {
+      buttonDecimal.classList.remove("pressed");
+      buttonDecimal.classList.add("flash");
+      setTimeout(() => buttonDecimal.classList.remove("flash"), 300);
+    });
+
+
+            // OPERATORS
+    // sounds effects for plus button
+    // Mouse over
+    plus.addEventListener("mouseover", function() {
+      plus.classList.add("hovered");
+    });
+
+
+    // Mouse out
+    plus.addEventListener("mouseout", function() {
+      plus.classList.remove("hovered");
+    });
+
+
+    // Mouse down (pressed)
+    plus.addEventListener("mousedown", function() {
+      plus.classList.add("pressed");
+      clickSound.currentTime = 0; // rewind sound
+      clickSound.play();          // play sound
+    });
+
+
+    // Mouse up (release)
+    plus.addEventListener("mouseup", function() {
+      plus.classList.remove("pressed");
+      plus.classList.add("flash");
+      setTimeout(() => plus.classList.remove("flash"), 300);
+    });
+
+
+    // sounds effects for minus button
+    // Mouse over
+    minus.addEventListener("mouseover", function() {
+      minus.classList.add("hovered");
+    });
+
+
+    // Mouse out
+    minus.addEventListener("mouseout", function() {
+      minus.classList.remove("hovered");
+    });
+
+
+    // Mouse down (pressed)
+    minus.addEventListener("mousedown", function() {
+      minus.classList.add("pressed");
+      clickSound.currentTime = 0; // rewind sound
+      clickSound.play();          // play sound
+    });
+
+
+    // Mouse up (release)
+    minus.addEventListener("mouseup", function() {
+      minus.classList.remove("pressed");
+      minus.classList.add("flash");
+      setTimeout(() => minus.classList.remove("flash"), 300);
+    });
+
+
+    // sounds effects for times button
+    // Mouse over
+    times.addEventListener("mouseover", function() {
+      times.classList.add("hovered");
+    });
+
+
+    // Mouse out
+    times.addEventListener("mouseout", function() {
+      times.classList.remove("hovered");
+    });
+
+
+    // Mouse down (pressed)
+    times.addEventListener("mousedown", function() {
+      times.classList.add("pressed");
+      clickSound.currentTime = 0; // rewind sound
+      clickSound.play();          // play sound
+    });
+
+
+    // Mouse up (release)
+    times.addEventListener("mouseup", function() {
+      times.classList.remove("pressed");
+      times.classList.add("flash");
+      setTimeout(() => times.classList.remove("flash"), 300);
+    });
+
+
+    // sounds effects for division button
+    // Mouse over
+    division.addEventListener("mouseover", function() {
+      division.classList.add("hovered");
+    });
+
+
+    // Mouse out
+    division.addEventListener("mouseout", function() {
+      division.classList.remove("hovered");
+    });
+
+
+    // Mouse down (pressed)
+    division.addEventListener("mousedown", function() {
+      division.classList.add("pressed");
+      clickSound.currentTime = 0; // rewind sound
+      clickSound.play();          // play sound
+    });
+
+
+    // Mouse up (release)
+    division.addEventListener("mouseup", function() {
+      division.classList.remove("pressed");
+      division.classList.add("flash");
+      setTimeout(() => division.classList.remove("flash"), 300);
+    });
+
+
+    // sounds effects for equals button
+    // Mouse over
+    equal.addEventListener("mouseover", function() {
+      equal.classList.add("hovered");
+    });
+
+
+    // Mouse out
+    equal.addEventListener("mouseout", function() {
+      equal.classList.remove("hovered");
+    });
+
+
+    // Mouse down (pressed)
+    equal.addEventListener("mousedown", function() {
+      equal.classList.add("pressed");
+      equalSound.currentTime = 0; // rewind sound
+      equalSound.play();          // play sound
+    });
+
+
+    // Mouse up (release)
+    equal.addEventListener("mouseup", function() {
+      equal.classList.remove("pressed");
+      equal.classList.add("flash");
+      setTimeout(() => equal.classList.remove("flash"), 300);
+    });
+
+
+  </script>
+
+
+</body>
+</html>
+
+
+
+
+
+
+

@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Info List</title>
+
+    <style>
+        body {
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            margin: 0;
+            background-color: #e4eef3;
+            color:#2a2a2a
+            /* display:flex;
+            justify-content: center;
+            align-items: center; */
+        }
+
+        input {
+            text-align: center;
+            margin:20px;
+            width:250px;
+        }
+
+        .studentTable {
+            border:1px solid #2a2a2a;
+            background-color: white;
+            padding:12px;
+            height: fit-content;
+            text-align: center;
+            box-shadow: 6px 6px rgba(92, 103, 110, 0.5);
+        }
+
+        button {
+            width:fit-content;
+            height: fit-content;
+        }
+
+        .button {
+            width:fit-content;
+            height:fit-content;
+            border-radius: 15px;
+            padding:12px;
+            font-weight: bold;
+            background-color: rgb(106, 162, 202);
+            box-shadow: 4px 4px rgba(52, 87, 113, 0.5);
+        }
+        
+        .button:hover {
+            background-color: rgb(133, 196, 240);
+        }
+
+        .button:active {
+            background-color: rgb(106, 162, 202);
+        }
+
+        .deleteButton {
+            width:fit-content;
+            height:fit-content;
+            border-radius: 12px;
+            padding:8px;
+            font-weight: bold;
+            background-color: rgb(202, 106, 106);
+            box-shadow: 4px 4px rgba(113, 52, 52, 0.5);
+        }
+        
+        .deleteButton:hover {
+            background-color: rgb(240, 133, 133);
+        }
+
+        .deleteButton:active {
+            background-color: rgb(202, 106, 106);
+        }
+
+        .parent {
+            /* position:relative;  */
+            border: 0.5px dotted white;
+        }
+
+        .bgColour {
+            background-color: #5a9bc8;
+            z-index: -1;
+            position:absolute;
+            width:100%;
+            height:200px;
+
+        }
+
+        .top {
+            /* border: 1px solid #447498; */
+            border-top-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            background-color: rgb(253, 253, 253);
+            margin-top:80px;
+            margin-left:50px;
+            margin-right:50px;
+            padding:30px;
+            box-shadow: 8px 8px rgba(52, 87, 113, 0.5);
+        }
+
+        .bottom {
+            /* border: 1px solid #447498; */
+            border-top-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            background-color: rgb(253, 253, 253);
+            margin:50px;
+            padding:30px;
+            box-shadow: 8px 8px rgba(52, 87, 113, 0.5);
+            
+        }
+
+        .bottomInfo {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .exportTable {
+            padding-left:21px;
+            width:fit-content;
+        }
+
+        .border {
+            border: 1px solid #2a2a2a;
+        }
+
+        .underline {
+            color: #2a2a2a;
+        }
+
+
+        .thInput {
+            text-align: right;
+        }
+
+        .thOutput {
+            text-align: left;
+            border: 1px solid #2a2a2a;
+            background-color: #dde6eb;
+            padding:10px; 
+            
+        }
+
+        .thGivenOutput {
+            text-align: left;
+            border: 1px solid #2a2a2a;
+            padding:10px; 
+            background-color: white;
+            
+        }
+
+        .leftAlign {
+            text-align: left;
+        }
+
+
+        .ageInput {
+            width:50px;
+        }
+
+        .required {
+            color:red;
+            font-weight: bold;
+        }
+
+        .notRequired {
+            color:white;
+            font-weight: bold;
+        }
+
+        .bold {
+            font-weight: bold;
+            font-size: smaller;
+        }
+
+        .error {
+            color:red;
+            font-weight: bold;
+            font-size: smaller;
+        }
+
+        .underline {
+            width:100%;
+            height: 0.5px;
+            background-color:#2a2a2a;
+        }
+
+        
+
+    </style>
+</head>
+<body>
+
+    <div class="parent">
+        <div class="bgColour"></div>
+
+        <div class="top">
+            
+            <h1>Enter Student Information</h1>
+            <p><label class="required">*</label> Required Field</p>
+            <p class="underline"></p>
+    
+            <table>
+                <tr>
+                    <th class="thInput"><label for="fName">First Name: </label><label class="required">*</label></th>
+                    <td><input id="fName"></td>
+                </tr>
+
+                <!-- error row -->
+                <tr>
+                    <td></td>
+                    <td><label id="errorFN" class="error"></label></td>
+                </tr>
+
+                <tr>
+                    <th class="thInput"><label for="lName">Last Name: </label><label class="required">*</label></th>
+                    <td><input id="lName"></td>
+                </tr>
+
+                <!-- error row -->
+                <tr>
+                    <td></td>
+                    <td><label id="errorLN" class="error"></label></td>
+                </tr>
+
+                <tr>
+                    <th class="thInput"><label for="age">Age: </label><label class="notRequired">*</label></th>
+                    <td class="leftAlign"><input id="age" class="ageInput"></td>
+                    <p></p>
+                </tr>
+                
+                <tr>
+                    <th class="thInput"><label for="email">Email: </label><label class="required">*</label></th>
+                    <td><input id="email"></td>
+                </tr>
+
+                <!-- error row -->
+                <tr>
+                    <td></td>
+                    <td><label id="errorMail" class="error"></label></td>
+                </tr>
+            
+
+            </table>
+            
+            <p id="topInfo"></p>
+
+            <button id="addInfo" class="button">Add</button>
+            <button id="display" class="button">Display</button>
+
+        </div>
+
+    <!-- closes parent div -->
+    </div>
+
+    
+    <!-- divs for output -->
+    <div class="bottom">
+        
+        <h1>Student Information</h1>
+        <p>Added students will appear in the table below after the display button is pressed.</p>
+        <p class="underline"></p>
+
+        <div class="bottomInfo">
+            <table id="studentTable" class="studentTable">
+                <tr class="leftAlignPad">
+                    <th class="thOutput">Student Name</th>
+                    <th class="thOutput">Age</th>
+                    <th class="thOutput">Email</th>
+                </tr>
+            </table>
+
+            <div>
+
+                <div class="exportTable">
+                    <h4 for="delInput">Extra Functions</h4>
+                    <div class="underline"></div>
+                    <table>
+                        <tr><td><input type="file" id="fileInput"></td></tr>
+                        <tr><td class="exportTable"><button onclick="exportTableToTxt()">Export to students.txt</button></td></tr>
+                        <tr></tr>
+                        <tr></tr>
+                        <tr></tr>
+                        <tr><td class="exportTable"><button id="addInfo" class="deleteButton" onclick="clearAll()">Clear All</button></td></tr>
+                    </table>
+                    
+                </div>
+            
+            
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+
+        //Importing files
+        fileInput.addEventListener("change", function() {
+
+            const file = fileInput.files[0];
+            if (!file) return
+
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                
+                // Assign file contents to string variable
+                let input = e.target.result; 
+
+                //read file and separates it per person
+                let peopleInput =input.split(",");
+                console.log(`People: ${peopleInput}`);
+                
+                //simple for loop to output each country on a new line
+                for (let i=0; i<peopleInput.length; i++) {
+
+                    if (peopleInput[i].trim() !== "") {
+                        //reads list per person and splits it by the details inside
+                        let peopleDetails = peopleInput[i].split(" ");
+                        console.log(`Details: ${peopleDetails}`);
+
+                        studentTable.innerHTML += `<tr class="leftAlign"><td class="thGivenOutput">${peopleDetails[0]} ${peopleDetails[1]}</td><td class="thGivenOutput">${peopleDetails[2]}</td><td class="thGivenOutput">${peopleDetails[3]}</td></tr>`;
+                
+                    }
+                }
+            };
+                
+            reader.readAsText(file);
+
+            alert("Importing file...")
+
+        });
+
+        //Exporting files *REREAD THIS
+        function exportTableToTxt() {
+            const table = document.getElementById('studentTable');
+            let txtContent = '';
+
+            // Get table rows and cells
+            const rows = table.querySelectorAll('tbody tr');
+            rows.forEach(row => {
+                const cells = Array.from(row.querySelectorAll('td')).map(td => td.textContent);
+                txtContent += cells.join(' ') + ',';
+            });
+
+            // Create a Blob object with the text content
+            const blob = new Blob([txtContent], { type: 'text/plain' });
+
+            // Create a temporary anchor element to trigger the download
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'student.txt'; // Set the desired filename
+            document.body.appendChild(a);
+            a.click(); // Simulate a click to download the file
+
+            // Clean up the temporary anchor element
+            document.body.removeChild(a);
+            URL.revokeObjectURL(a.href); // Release the object URL
+        }
+
+
+        //Array for students
+        let students = [];
+
+        //Gets the table and puts it into a variable 
+        studentTable = document.getElementById("studentTable");
+
+        // Constants for the buttons
+        let addButton = document.getElementById("addInfo");
+        let displayButton = document.getElementById("display");
+
+        //calls a function based on which button is clicked
+        addButton.addEventListener("click", checkInputs);
+        displayButton.addEventListener("click", displayUserInfo);
+
+        // Constructor function that uses user input 
+        function Student(first, last, age, email) {
+            this.firstName = first;
+            this.lastName = last;
+            this.age = age;
+            this.email = email;
+            this.display = (`Recently Added: ${first} ${last}; ${age} years old; Contact at ${email}`)
+            
+        }
+
+        //runs to check if there is input where required when add button is clicked
+        function checkInputs() {
+            //puts the ids of the required inputs and error msg inputs & the # of errors
+            let requiredList = ["fName", "lName", "email"];
+            let errorList = ["errorFN", "errorLN", "errorMail"];
+            let numOfErrors = 0;
+
+            //checks each required input box for value
+            for (let i=0; i<requiredList.length; i++) {
+                let check = document.getElementById(requiredList[i]).value;
+
+                //removes spaces in the current input box to check if there's any actual input
+                if (check.trim() == "") {
+                    //displays an error msg with the right input box and adds 1 to # of errors var
+                    document.getElementById(errorList[i]).innerHTML="This is a required field.";
+                    numOfErrors++;
+                } else {
+                    //if it's filled in then gets rid of error msg
+                    document.getElementById(errorList[i]).innerHTML="";
+                }
+            
+            }
+            
+
+            //logs num of errors in console and checks it after
+            console.log(`Num of errors: ${numOfErrors}`);
+
+            if (numOfErrors > 0) {
+                //if there are errors, tell the user
+                if (numOfErrors == 1) {
+                    document.getElementById("topInfo").innerHTML=`${numOfErrors} field is empty. You cannot proceed to adding without filling these in.`;
+                } else {
+                    document.getElementById("topInfo").innerHTML=`${numOfErrors} fields are empty. You cannot proceed to adding without filling these in.`;
+                }
+                
+            } else {
+                //if there are none, call the fn that adds it to the students list
+                console.log("Required inputs filled");
+
+                document.getElementById("topInfo").innerHTML="";
+                getUserInfo();
+            }
+            
+        }
+
+        //runs when add button is clicked
+        function getUserInfo() {
+            //gets user info
+            let fname = document.getElementById("fName").value;
+            let lname = document.getElementById("lName").value;
+            let age = document.getElementById("age").value;
+            let email = document.getElementById("email").value;
+
+            //adds new student to students list
+            students.push(new Student(fname,lname,age,email));
+
+            document.getElementById("topInfo").innerHTML=`${students[students.length-1].display}`
+            console.log(fname,lname,age,email);
+        }
+
+        //RETURN TO THIS
+        function displayUserInfo() {            
+                        
+            //adds each input into the student info table
+            for (let i=0; i<students.length; i++) {
+                if (students[i].age.trim()=="") {
+                    studentTable.innerHTML += `<tr class="leftAlign"><td class="thGivenOutput">${students[i].firstName} ${students[i].lastName}</td><td class="thGivenOutput"><label class="bold">N/A</label></td><td class="thGivenOutput">${students[i].email}</td></tr>`
+                } else {
+                    studentTable.innerHTML += `<tr class="leftAlign"><td class="thGivenOutput">${students[i].firstName} ${students[i].lastName}</td><td class="thGivenOutput">${students[i].age}</td><td class="thGivenOutput">${students[i].email}</td></tr>`
+                }
+                
+            }
+
+            //either says display successful & # of new items or ask to enter name if there's nothing in the student list
+            if (students.length > 0) {
+                document.getElementById("topInfo").innerHTML=`Display Successful! (${students.length})`;
+            } else {
+                document.getElementById("topInfo").innerHTML=`Please add some students to the list.`;
+            }
+
+            //cleas student list
+            students = [];
+            console.log("Student List has", students.length);
+
+            
+        }
+
+        
+        //clears the table
+        function clearAll() {
+
+            //asks the user if they want to clear the table
+            let checkToClear = prompt(`Are you sure you want to clear everything? ("Y" or "N")`);
+
+            //if they enter "y" then it will be cleared
+            if (checkToClear.toUpperCase() == "Y") {
+                alert("Clearing list...");
+                
+                //recreates the headings
+                studentTable.innerHTML=`<tr class="leftAlignPad"><th class="thOutput">Student Name</th><th class="thOutput">Age</th><th class="thOutput">Email</th></tr>`
+                    
+            } 
+
+        }
+
+    </script>
+
+</body>
+</html>

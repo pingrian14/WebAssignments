@@ -123,6 +123,10 @@
             border: 1px solid #2a2a2a;
         }
 
+        .center {
+            text-align: center;
+        }
+
         .underline {
             color: #2a2a2a;
         }
@@ -208,7 +212,7 @@
                 <!-- error row -->
                 <tr>
                     <td></td>
-                    <td><label id="errorFN" class="error"></label></td>
+                    <td class="center"><label id="errorFN" class="error"></label></td>
                 </tr>
 
                 <tr>
@@ -219,7 +223,7 @@
                 <!-- error row -->
                 <tr>
                     <td></td>
-                    <td><label id="errorLN" class="error"></label></td>
+                    <td class="center"><label id="errorLN" class="error"></label></td>
                 </tr>
 
                 <tr>
@@ -236,7 +240,7 @@
                 <!-- error row -->
                 <tr>
                     <td></td>
-                    <td><label id="errorMail" class="error"></label></td>
+                    <td class="center"><label id="errorMail" class="error"></label></td>
                 </tr>
             
 
@@ -348,7 +352,9 @@
             // Create a temporary anchor element to trigger the download
             const a = document.createElement('a');
             a.href = URL.createObjectURL(blob);
-            a.download = 'student.txt'; // Set the desired filename
+
+            // Set the desired filename
+            a.download = 'students.txt'; 
             document.body.appendChild(a);
             a.click(); // Simulate a click to download the file
 
